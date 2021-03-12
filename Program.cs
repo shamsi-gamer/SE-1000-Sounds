@@ -8,6 +8,7 @@ namespace SE_909_Sounds
     {
         const double    Tau = Math.PI*2;
                         
+        const int       NoteScale  = 2;
                         
         static uint     sampleRate = 44100;
         static double   seconds    = 10;
@@ -30,18 +31,16 @@ namespace SE_909_Sounds
         {
             InitBuffers();
 
-            CreateToneSamples("Sine",     sine,     12, 150);
-            CreateToneSamples("Square",   square,   12, 150);
-            CreateToneSamples("Triangle", tri,      12, 150);
-            CreateToneSamples("Saw",      saw,      12, 150);
+            //CreateToneSamples("Sine",     sine,     12, 150);
+            //CreateToneSamples("Square",   square,   12, 150);
+            //CreateToneSamples("Triangle", tri,      12, 150);
+            //CreateToneSamples("Saw",      saw,      12, 150);
 
-            CreateLowNoiseSamples ("LowNoise",  12, 150);
-            CreateHighNoiseSamples("HighNoise", 12, 150);
-            //CreateBandNoiseSamples("BandNoise", 12, 150);
+            //CreateLowNoiseSamples ("LowNoise",  12, 150);
+            //CreateHighNoiseSamples("HighNoise", 12, 150);
+            CreateBandNoiseSamples("BandNoise", 12, 150);
         }
 
-
-        //double sign(double d) { return d / Math.abs(d); }
 
         static void InitBuffers()
         {
