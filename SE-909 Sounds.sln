@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE-909 Sounds", "SE-909 Sounds.csproj", "{223594F6-319D-4DA3-B101-C3CE93581708}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{223594F6-319D-4DA3-B101-C3CE93581708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{223594F6-319D-4DA3-B101-C3CE93581708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{223594F6-319D-4DA3-B101-C3CE93581708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{223594F6-319D-4DA3-B101-C3CE93581708}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97F83658-777C-4A1F-85F7-238E6B3BEFBC}
+	EndGlobalSection
+EndGlobal
