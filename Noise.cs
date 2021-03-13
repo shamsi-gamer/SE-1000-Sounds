@@ -133,7 +133,7 @@ namespace SE_909_Sounds
         static void CreateBandNoiseSample(double note, ref int rndIndex, WaveFile wav)
         {
             var step   = 0.01;
-            var spread = 4;
+            var spread = 2;
 
             for (double n = prevNote - spread+1; n < note + spread+1; n++)
             {

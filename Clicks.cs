@@ -89,10 +89,10 @@ namespace SE_909_Sounds
             for (int i = 0; i < wav.Sample.Length; i++)
             {
                 var pos  = i/(double)wav.Sample.Length * SampleRate;
-                var rate = SampleRate / 43;
+                var rate = SampleRate / 38;
                 var f    = (pos%rate) / (rate);
 
-                wav.Sample[i] *= step * Math.Min(Math.Pow(1-f+0.1, 25), 1) * Volume;
+                wav.Sample[i] *= step * Math.Min(Math.Pow(1-f+0.06, 25), 1) * Volume;
             }
 
             prevNote = note;
