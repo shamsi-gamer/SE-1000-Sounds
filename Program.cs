@@ -10,52 +10,40 @@ namespace SE_909_Sounds
                         
         const int       NoteScale  = 2;
                         
-        static uint     sampleRate = 44100;
-        static double   seconds    = 10;
+        static uint     SampleRate = 44100;
+        static double   MaxLength  = 10;
 
-        static double   volume     = 0.5;
-
-
-        static double[] rnd        = new double[(int)Math.Round(seconds * sampleRate * 2)];
-        static double[] click      = new double[(int)Math.Round(seconds * sampleRate * 2)];
-
-        static double[] altBuffer  = new double[(int)Math.Round(seconds * sampleRate)];
-
-        static Random   random     = new Random(DateTime.Now.Millisecond);
+        static double   Volume     = 0.5;
 
 
-        static WaveFile wav        = new WaveFile(sampleRate, seconds);
+        static Random   random = new Random(DateTime.Now.Millisecond);
+        static double[] rnd    = new double[(int)Math.Round(MaxLength * SampleRate * 2)];
 
 
         static void Main(string[] args)
         {
             InitBuffers();
 
-            //CreateToneSamples("Sine",     sine,     12, 150);
-            //CreateToneSamples("Square",   square,   12, 150);
-            //CreateToneSamples("Triangle", tri,      12, 150);
-            //CreateToneSamples("Saw",      saw,      12, 150);
+            //CreateToneSamples("Sine",     sine,     12, 150, 10);
+            //CreateToneSamples("Square",   square,   12, 150, 10);
+            //CreateToneSamples("Triangle", tri,      12, 150, 10);
+            //CreateToneSamples("Saw",      saw,      12, 150, 10);
 
-            //CreateLowNoiseSamples ("LowNoise",  12, 150);
-            //CreateHighNoiseSamples("HighNoise", 12, 150);
-            CreateBandNoiseSamples("BandNoise", 12, 150);
+            //CreateLowNoiseSamples ("LowNoise",  12, 150, 5);
+            //CreateHighNoiseSamples("HighNoise", 12, 150, 5);
+            //CreateBandNoiseSamples("BandNoise", 12, 150, 5);
+
+            //CreateClickSamples("Click", 12, 150, 1);
+            CreateCrunchSamples("Crunch", 12, 150, 1);
         }
 
 
         static void InitBuffers()
         {
-            double freq = 1500;
-            int    L    = (int)Math.Round(seconds * sampleRate * 2);
-            double len  = 0.005;
-            int    Len  = (int)(len * L);
+            int L = (int)Math.Round(MaxLength * SampleRate * 2);
   
             for (int i = 0; i < L; i++)
-            {
                 rnd[i] = -1 + random.NextDouble()*2;
-
-                double f = Math.Min(Math.Max(0, 1 - (double)i/Len), 1);
-                click[i] = sine(f * freq / i, 0, 0, 0) * Math.Pow(f, 16);
-            }
         }
 
 
@@ -66,7 +54,7 @@ namespace SE_909_Sounds
         }
 
 
-        static void SaveSample(string name, int note)
+        static void SaveSample(WaveFile wav, string name, int note)
         {
             string userHome = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
@@ -78,6 +66,12 @@ namespace SE_909_Sounds
             filePath += "\\SE-909_" + name + "_" + note + ".wav";
 
             wav.Save(filePath);
+        }
+
+
+        static double note2freq(double note)
+        { 
+            return 440 * Math.Pow(2, (note/2 - 69) / 12.0);
         }
     }
 }

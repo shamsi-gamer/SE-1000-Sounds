@@ -5,12 +5,13 @@ namespace SE_909_Sounds
 {
     partial class Program
     {
-        static double prevNote;
+        static double   prevNote;
+        static double[] altBuffer;
 
 
-        static void CreateLowNoiseSamples(string name, int firstNote, int lastNote)
+        static void CreateLowNoiseSamples(string name, int firstNote, int lastNote, double seconds)
         {
-            ClearBuffer(altBuffer);
+            altBuffer = new double[(int)Math.Round(seconds * SampleRate)];
 
             prevNote = firstNote*NoteScale - 1;
 
@@ -18,8 +19,9 @@ namespace SE_909_Sounds
 
             for (int note = firstNote * NoteScale; note <= lastNote * NoteScale; note++)
             {
-                CreateLowNoiseSample(note, ref rndIndex);
-                SaveSample(name, note);
+                var wav = new WaveFile(SampleRate, seconds);
+                CreateLowNoiseSample(note, ref rndIndex, wav);
+                SaveSample(wav, name, note);
 
                 var temp   = wav.Sample;
                 wav.Sample = altBuffer;
@@ -28,10 +30,8 @@ namespace SE_909_Sounds
         }
 
 
-        static void CreateLowNoiseSample(double note, ref int rndIndex)
+        static void CreateLowNoiseSample(double note, ref int rndIndex, WaveFile wav)
         {
-            wav.Clear();
-
             var step = 0.1;
 
             for (double n = prevNote; n < note; n++)
@@ -41,7 +41,7 @@ namespace SE_909_Sounds
                     Console.Write("low noise " + note.ToString("0") + " (" + f.ToString("0.000") + ") ... ");
 
                     double freq = note2freq(n + f);
-                    double L    = sampleRate / freq * 2;
+                    double L    = SampleRate / freq * 2;
 
                     for (int i = 0; i < wav.Sample.Length; i++)
                         wav.Sample[i] += Math.Cos(((i % L) / L + rnd[rndIndex]) * Tau);
@@ -62,9 +62,9 @@ namespace SE_909_Sounds
         }
 
 
-        static void CreateHighNoiseSamples(string name, int firstNote, int lastNote)
+        static void CreateHighNoiseSamples(string name, int firstNote, int lastNote, double seconds)
         {
-            ClearBuffer(altBuffer);
+            altBuffer = new double[(int)Math.Round(seconds * SampleRate)];
 
             prevNote = lastNote*NoteScale;
 
@@ -72,8 +72,9 @@ namespace SE_909_Sounds
 
             for (int note = lastNote * NoteScale; note >= firstNote * NoteScale; note--)
             {
-                CreateHighNoiseSample(note, ref rndIndex);
-                SaveSample(name, note);
+                var wav = new WaveFile(SampleRate, seconds);
+                CreateHighNoiseSample(note, ref rndIndex, wav);
+                SaveSample(wav, name, note);
 
                 var temp   = wav.Sample;
                 wav.Sample = altBuffer;
@@ -82,10 +83,8 @@ namespace SE_909_Sounds
         }
 
 
-        static void CreateHighNoiseSample(double note, ref int rndIndex)
+        static void CreateHighNoiseSample(double note, ref int rndIndex, WaveFile wav)
         {
-            wav.Clear();
-
             var step = 0.1;
 
             for (double n = prevNote; n > note; n--)
@@ -95,7 +94,7 @@ namespace SE_909_Sounds
                     Console.Write("high noise " + note.ToString("0") + " (" + f.ToString("0.000") + ") ... ");
 
                     double freq = note2freq(n + f);
-                    double L    = sampleRate / freq * 2;
+                    double L    = SampleRate / freq * 2;
 
                     for (int i = 0; i < wav.Sample.Length; i++)
                         wav.Sample[i] += Math.Cos(((i % L) / L + rnd[rndIndex]) * Tau);
@@ -116,7 +115,7 @@ namespace SE_909_Sounds
         }
 
 
-        static void CreateBandNoiseSamples(string name, int firstNote, int lastNote)
+        static void CreateBandNoiseSamples(string name, int firstNote, int lastNote, double seconds)
         {
             prevNote = firstNote * NoteScale - 1;
 
@@ -124,16 +123,15 @@ namespace SE_909_Sounds
 
             for (int note = firstNote * NoteScale; note <= lastNote * NoteScale; note++)
             {
-                CreateBandNoiseSample(note, ref rndIndex);
-                SaveSample(name, note);
+                var wav = new WaveFile(SampleRate, seconds);
+                CreateBandNoiseSample(note, ref rndIndex, wav);
+                SaveSample(wav, name, note);
             }
         }
 
 
-        static void CreateBandNoiseSample(double note, ref int rndIndex)
+        static void CreateBandNoiseSample(double note, ref int rndIndex, WaveFile wav)
         {
-            wav.Clear();
-
             var step   = 0.01;
             var spread = 4;
 
@@ -144,7 +142,7 @@ namespace SE_909_Sounds
                     Console.Write("band noise " + note.ToString("0") + " (" + n.ToString("0") + ", " + f.ToString("0.000") + ") ... ");
 
                     double freq = note2freq(n + f);
-                    double L    = sampleRate / freq * 2;
+                    double L    = SampleRate / freq * 2;
 
                     for (int i = 0; i < wav.Sample.Length; i++)
                         wav.Sample[i] += Math.Cos(((i % L) / L + rnd[rndIndex]) * Tau);
