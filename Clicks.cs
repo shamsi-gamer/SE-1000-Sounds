@@ -34,8 +34,6 @@ namespace SE_909_Sounds
             double f  =  fStart;
             double df = (fEnd-fStart)/smpLen/2;
 
-            double t  = 0;
-
             for (int i = 0; i < smpLen; i++)
             { 
                 double L = SampleRate/f;
