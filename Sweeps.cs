@@ -5,7 +5,7 @@ namespace SE_909_Sounds
 {
     partial class Program
     {
-        static void CreateSweepDownSamples(string name, int firstNote, int lastNote, int noteSpread)
+        static void CreateSweepDownSamples(string name, int firstNote, int lastNote, int noteSpread, double len)
         {
             prevNote = firstNote * NoteScale - 1;
 
@@ -13,21 +13,19 @@ namespace SE_909_Sounds
             {
                 var wav = new WaveFile(
                     SampleRate, 
-                    CreateSweepDownSample(note, noteSpread));
+                    CreateSweepDownSample(name, note, noteSpread, len));
 
                 SaveSample(wav, name, note);
             }
         }
 
 
-        static double[] CreateSweepDownSample(double note, int noteSpread)
+        static double[] CreateSweepDownSample(string name, double note, int noteSpread, double len)
         {
-            Console.Write("sweep down " + note.ToString("0") + " ... ");
+            Console.Write(name + " " + note.ToString("0") + " ... ");
 
             var fStart = note2freq(note + noteSpread*NoteScale/2);
             var fEnd   = note2freq(note - noteSpread*NoteScale/2);
-
-            var len    = 1;
 
             var smpLen = (int)(len * 440/fStart * SampleRate);
             var sample = new double[smpLen];
@@ -49,7 +47,7 @@ namespace SE_909_Sounds
         }
 
 
-        static void CreateSweepUpSamples(string name, int firstNote, int lastNote, int noteSpread)
+        static void CreateSweepUpSamples(string name, int firstNote, int lastNote, int noteSpread, double len)
         {
             prevNote = firstNote * NoteScale - 1;
 
@@ -57,21 +55,19 @@ namespace SE_909_Sounds
             {
                 var wav = new WaveFile(
                     SampleRate, 
-                    CreateSweepUpSample(note, noteSpread));
+                    CreateSweepUpSample(name, note, noteSpread, len));
 
                 SaveSample(wav, name, note);
             }
         }
 
 
-        static double[] CreateSweepUpSample(double note, int noteSpread)
+        static double[] CreateSweepUpSample(string name, double note, int noteSpread, double len)
         {
-            Console.Write("sweep up " + note.ToString("0") + " ... ");
+            Console.Write(name + " " + note.ToString("0") + " ... ");
 
             var fStart = note2freq(note - noteSpread*NoteScale/2);
             var fEnd   = note2freq(note + noteSpread*NoteScale/2);
-
-            var len    = 0.1;
 
             var smpLen = (int)(len * 440/fStart * SampleRate);
             var sample = new double[smpLen];
