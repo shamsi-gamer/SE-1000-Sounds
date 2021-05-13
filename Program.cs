@@ -24,17 +24,19 @@ namespace SE_909_Sounds
         {
             InitBuffers();
 
-            //CreateToneSamples("Sine",     sine,     12, 150, 10);
-            //CreateToneSamples("Square",   square,   12, 150, 10);
-            //CreateToneSamples("Triangle", tri,      12, 150, 10);
-            //CreateToneSamples("Saw",      saw,      12, 150, 10);
+            CreateToneSamples("Sine",     sine,     12, 150, 10);
+            CreateToneSamples("Square",   square,   12, 150, 10);
+            CreateToneSamples("Triangle", tri,      12, 150, 10);
+            CreateToneSamples("Saw",      saw,      12, 150, 10);
 
-            //CreateLowNoiseSamples ("LowNoise",  12, 150, 5);
-            //CreateHighNoiseSamples("HighNoise", 12, 150, 5);
-            //CreateBandNoiseSamples("BandNoise", 12, 150, 5);
+            CreateLowNoiseSamples ("LowNoise",  12, 150, 5);
+            CreateHighNoiseSamples("HighNoise", 12, 150, 5);
+            CreateBandNoiseSamples("BandNoise", 12, 150, 5);
 
-            //CreateClickSamples("Click", 12, 150, 1);
-            CreateCrunchSamples("Crunch", 12, 150, 1);
+            CreateSweepDownSamples("SweepDown", 12, 150, 48);
+            CreateSweepUpSamples  ("SweepUp",   12, 150, 48);
+
+            CreateCrunchSamples   ("Crunch",    12, 150, 1);
         }
 
 

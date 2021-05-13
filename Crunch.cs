@@ -5,46 +5,6 @@ namespace SE_909_Sounds
 {
     partial class Program
     {
-        static void CreateClickSamples(string name, int firstNote, int lastNote, double seconds)
-        {
-            prevNote = firstNote * NoteScale - 1;
-
-            var rndIndex = 0;
-
-            for (int note = firstNote * NoteScale; note <= lastNote * NoteScale; note++)
-            {
-                var wav = new WaveFile(SampleRate, seconds);
-                CreateClickSample(note, ref rndIndex, (firstNote + lastNote)/2, lastNote - firstNote, wav);
-                SaveSample(wav, name, note);
-            }
-        }
-
-
-        static void CreateClickSample(double note, ref int rndIndex, int middleNote, int noteSpread, WaveFile wav)
-        {
-            Console.Write("click " + note.ToString("0") + " ... ");
-
-            double fStart = note2freq(note + 48);
-            double fEnd   = note2freq(note - 48);
-
-            double len    = 0.005;
-
-            int smpLen = (int)Math.Min(len * SampleRate, wav.Sample.Length);
-
-            double f  =  fStart;
-            double df = (fEnd-fStart)/smpLen/2;
-
-            for (int i = 0; i < smpLen; i++)
-            { 
-                double L = SampleRate/f;
-                wav.Sample[i] += Math.Sin(i/L * Tau) * Volume * (1-i/(double)smpLen);
-                f += df;
-            }
-    
-            Console.WriteLine("done");
-        }
-
-
         static void CreateCrunchSamples(string name, int firstNote, int lastNote, double seconds)
         {
             prevNote = firstNote * NoteScale - 1;

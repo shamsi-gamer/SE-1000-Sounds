@@ -23,6 +23,16 @@ namespace SE_909_Sounds
         }
 
 
+        public WaveFile(uint sampleRate, double[] sample)
+        {
+            m_header = new WaveHeader();
+            m_format = new WaveFormatChunk(sampleRate);
+            m_data   = new WaveDataChunk();
+                     
+            Sample   = sample;
+        }
+
+
         void PrepareSampleData()
         {
             m_data.shortArray = new short[Sample.Length * 2]; // 2 channels

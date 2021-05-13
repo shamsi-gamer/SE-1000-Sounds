@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clicks.cs" />
+    <Compile Include="Crunch.cs" />
+    <Compile Include="Sweeps.cs" />
     <Compile Include="Noise.cs" />
     <Compile Include="Tones.cs" />
     <Compile Include="WaveFile.cs" />
