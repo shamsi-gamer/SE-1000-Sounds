@@ -68,24 +68,19 @@ namespace SE_909_Sounds
         {
             Console.Write("sweep up " + note.ToString("0") + " ... ");
 
-            var fStart = note2freq(note + noteSpread*NoteScale/2);
-            var fEnd   = note2freq(note - noteSpread*NoteScale/2);
+            var fStart = note2freq(note - noteSpread*NoteScale/2);
+            var fEnd   = note2freq(note + noteSpread*NoteScale/2);
 
-            var len    = 1;
+            var len    = 0.1;
 
             var smpLen = (int)(len * 440/fStart * SampleRate);
             var sample = new double[smpLen];
 
-
-            //var f  =  fEnd;
-            //var df = (fStart-fEnd)/smpLen/2;
-
             for (int i = 0; i < smpLen; i++)
             { 
-                var f = fEnd + (fStart-fEnd)*Math.Pow(i/(double)smpLen/2, 2);
+                var f = fStart + (fEnd-fStart)*Math.Pow(i/(double)smpLen/2, 2);
                 double L = SampleRate/f;
                 sample[i] += Math.Sin(i/L * Tau) * Volume * (1-i/(double)smpLen);
-                //f += df;
             }
     
             Console.WriteLine("done");
