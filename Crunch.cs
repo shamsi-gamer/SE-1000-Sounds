@@ -22,38 +22,30 @@ namespace SE_909_Sounds
 
         static void CreateCrunchSample(double note, ref int rndIndex, WaveFile wav)
         {
-            var step   = 0.02;
-            var spread = 8;
+            double freq = note2freq(note);
+            double L    = SampleRate/freq * 2;
 
-            for (double n = prevNote - spread+1; n < note + spread+1; n++)
+            double clkFreq = freq * 64;
+            double clkL    = SampleRate/clkFreq * 2;
+
+            Console.Write("crunch " + note.ToString("0") + " ... ");
+
+            var  f = 0.0;
+            var df = 1.0/wav.Sample.Length;
+
+            for (int i = 0, j = 0; i < wav.Sample.Length; i++, j++, f += df)
             {
-                for (double f = step; f <= 1.0; f += step)
-                {
-                    Console.Write("crunch " + note.ToString("0") + " (" + n.ToString("0") + ", " + f.ToString("0.000") + ") ... ");
+                var c  = j % clkL;
+                var ck = Math.Max(16, clkL);
 
-                    double freq = note2freq(n + f);
-                    double L    = SampleRate / freq * 2;
+                var s = Math.Sin(c / clkL * Tau);
+                wav.Sample[i] = j < ck ? s * Volume : 0;
 
-                    for (int i = 0; i < wav.Sample.Length; i++)
-                        wav.Sample[i] += Math.Cos(((i % L) / L + rnd[rndIndex]) * Tau);
-
-                    rndIndex++;
-    
-                    Console.WriteLine("done");
-                }
-
+                if (j > i % L) 
+                    j = 0;
             }
 
-            for (int i = 0; i < wav.Sample.Length; i++)
-            {
-                var pos  = i/(double)wav.Sample.Length * SampleRate;
-                var rate = SampleRate / 30;
-                var f    = (pos%rate) / (rate);
-
-                wav.Sample[i] *= step * Math.Min(Math.Pow(1-f+0.05, 30), 1) * Volume;
-            }
-
-            prevNote = note;
+            Console.WriteLine("done");
         }
     }
 }
