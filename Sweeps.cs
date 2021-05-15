@@ -28,7 +28,7 @@ namespace SE_909_Sounds
             var fEnd   = note2freq(note - noteSpread*NoteScale/2);
 
             var smpLen = (int)(len * 440/fStart * SampleRate);
-            var sample = new double[smpLen];
+            var sample = new double[smpLen+SampleRate];
 
 
             var f  =  fStart;
@@ -40,7 +40,10 @@ namespace SE_909_Sounds
                 sample[i] += Math.Sin(i/L * Tau) * Volume * (1-i/(double)smpLen);
                 f += df;
             }
-    
+
+            for (int i = smpLen; i < smpLen+SampleRate; i++)
+                sample[i] = 0;
+
             Console.WriteLine("done");
 
             return sample;
@@ -70,7 +73,7 @@ namespace SE_909_Sounds
             var fEnd   = note2freq(note + noteSpread*NoteScale/2);
 
             var smpLen = (int)(len * 440/fStart * SampleRate);
-            var sample = new double[smpLen];
+            var sample = new double[smpLen+SampleRate];
 
             for (int i = 0; i < smpLen; i++)
             { 
@@ -78,7 +81,10 @@ namespace SE_909_Sounds
                 double L = SampleRate/f;
                 sample[i] += Math.Sin(i/L * Tau) * Volume * (1-i/(double)smpLen);
             }
-    
+
+            for (int i = smpLen; i < smpLen+SampleRate; i++)
+                sample[i] = 0;
+
             Console.WriteLine("done");
 
             return sample;
