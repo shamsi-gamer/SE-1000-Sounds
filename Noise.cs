@@ -132,8 +132,8 @@ namespace SE_909_Sounds
 
         static void CreateBandNoiseSample(double note, ref int rndIndex, WaveFile wav)
         {
-            var step   = 0.0025;
-            var spread = 2;
+            var step   = 0.01;
+            var spread = 1;
 
             for (double n = prevNote - spread+1; n < note + spread+1; n++)
             {
@@ -155,7 +155,7 @@ namespace SE_909_Sounds
             }
 
             for (int i = 0; i < wav.Sample.Length; i++)
-                wav.Sample[i] *= step;
+                wav.Sample[i] *= 0.01;
 
             prevNote = note;
         }
