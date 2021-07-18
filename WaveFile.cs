@@ -40,7 +40,7 @@ namespace SE_1000_Sounds
             for (int i = 0; i < Sample.Length; i++)
             { 
                 m_data.shortArray[i*2  ] = 
-                m_data.shortArray[i*2+1] = (short)Math.Min(Math.Max(-0x7ff8, Math.Round(0x7ff8 * Sample[i])), 0x7ff8); // 0x7ff8 is the max amplitude for 16-bit autio
+                m_data.shortArray[i*2+1] = (short)Math.Min(Math.Max(-0x7ff8, Math.Round(0x7ff8 * Sample[i])), 0x7ff8); // 0x7ff8 is the max amplitude for 16-bit audio
             }
 
             m_data.dwChunkSize = (uint)(m_data.shortArray.Length * (m_format.wBitsPerSample / 8));
