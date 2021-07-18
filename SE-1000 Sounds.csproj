@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{223594F6-319D-4DA3-B101-C3CE93581708}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SE_909_Sounds</RootNamespace>
+    <RootNamespace>SE_1000_Sounds</RootNamespace>
     <AssemblyName>SE-909 Sounds</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

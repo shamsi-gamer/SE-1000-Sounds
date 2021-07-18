@@ -2,7 +2,7 @@
 using System.IO;
 
 
-namespace SE_909_Sounds
+namespace SE_1000_Sounds
 {
     partial class Program
     {
