@@ -24,22 +24,22 @@ namespace SE_1000_Sounds
         {
             InitBuffers();
 
-            //CreateToneSamples("Sine",     sine,     12, 150, 5);
-            //CreateToneSamples("Square",   square,   12, 150, 5);
-            //CreateToneSamples("Triangle", tri,      12, 150, 5);
-            //CreateToneSamples("Saw",      saw,      12, 150, 5);
+            CreateToneSamples     ("Sine",     sine,   12, 150, 5);
+            CreateToneSamples     ("Square",   square, 12, 150, 5);
+            CreateToneSamples     ("Triangle", tri,    12, 150, 5);
+            CreateToneSamples     ("Saw",      saw,    12, 150, 5);
 
-            //CreateLowNoiseSamples ("LowNoise",  12, 150, 5);
-            //CreateHighNoiseSamples("HighNoise", 12, 150, 5);
-            CreateBandNoiseSamples("BandNoise", 12, 150, 5);
+            CreateLowNoiseSamples ("LowNoise",         12, 150, 5);
+            CreateHighNoiseSamples("HighNoise",        12, 150, 5);
+            CreateBandNoiseSamples("BandNoise",        12, 150, 5);
+                                                       
+            CreateSweepDownSamples("SlowSweepDown",    12, 150, 48, 1);
+            CreateSweepUpSamples  ("SlowSweepUp",      12, 150, 48, 0.1);
+                                                       
+            CreateSweepDownSamples("FastSweepDown",    12, 150, 48, 0.1);
+            CreateSweepUpSamples  ("FastSweepUp",      12, 150, 48, 0.01);
 
-            //CreateSweepDownSamples("SlowSweepDown", 12, 150, 48, 1);
-            //CreateSweepUpSamples  ("SlowSweepUp",   12, 150, 48, 0.1);
-
-            //CreateSweepDownSamples("FastSweepDown", 12, 150, 48, 0.1);
-            //CreateSweepUpSamples  ("FastSweepUp",   12, 150, 48, 0.01);
-
-            //CreateCrunchSamples   ("Crunch",    12, 150, 1);
+            CreateCrunchSamples   ("Crunch",           12, 150, 1);
         }
 
 

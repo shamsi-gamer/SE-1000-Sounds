@@ -32,12 +32,7 @@ namespace SE_1000_Sounds
 
         static Func<double, double> sine   = (double t) => Math.Sin(t * Tau);
         static Func<double, double> square = (double t) => t < 0.5 ? 1 : -1;
-        static Func<double, double> tri    = (double t) => 
-        { 
-                 if (t <  0.25)             return t / 0.25;
-            else if (t >= 0.25 && t < 0.75) return 1 - 4 * (t - 0.25);
-            else                            return (t - 0.75) / 0.25 - 1; 
-        };
+        static Func<double, double> tri    = (double t) => 1 - 2*Math.Abs(2*(t%1)-1);
         static Func<double, double> saw    = (double t) => t*2 - 1;
     }
 }
