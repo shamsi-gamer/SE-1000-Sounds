@@ -9,6 +9,7 @@ namespace SE_1000_Sounds
         static double[] altBuffer;
 
 
+
         static void CreateLowNoiseSamples(string name, int firstNote, int lastNote, double seconds)
         {
             altBuffer = new double[(int)Math.Round(seconds * SampleRate)];
@@ -28,6 +29,7 @@ namespace SE_1000_Sounds
                 altBuffer  = temp;
             }
         }
+
 
 
         static void CreateLowNoiseSample(double note, ref int rndIndex, WaveFile wav)
@@ -62,6 +64,7 @@ namespace SE_1000_Sounds
         }
 
 
+
         static void CreateHighNoiseSamples(string name, int firstNote, int lastNote, double seconds)
         {
             altBuffer = new double[(int)Math.Round(seconds * SampleRate)];
@@ -81,6 +84,7 @@ namespace SE_1000_Sounds
                 altBuffer  = temp;
             }
         }
+
 
 
         static void CreateHighNoiseSample(double note, ref int rndIndex, WaveFile wav)
@@ -115,7 +119,8 @@ namespace SE_1000_Sounds
         }
 
 
-        static void CreateBandNoiseSamples(string name, int firstNote, int lastNote, double seconds)
+
+        static void CreateBandNoiseSamples(string name, int spread, int firstNote, int lastNote, double seconds)
         {
             prevNote = firstNote * NoteScale - 1;
 
@@ -124,22 +129,23 @@ namespace SE_1000_Sounds
             for (int note = firstNote * NoteScale; note <= lastNote * NoteScale; note++)
             {
                 var wav = new WaveFile(SampleRate, seconds);
-                CreateBandNoiseSample(note, ref rndIndex, wav);
+                CreateBandNoiseSample(name, note, spread, ref rndIndex, wav);
                 SaveSample(wav, name, note);
             }
         }
 
 
-        static void CreateBandNoiseSample(double note, ref int rndIndex, WaveFile wav)
+
+        static void CreateBandNoiseSample(string name, double note, int spread, ref int rndIndex, WaveFile wav)
         {
             var step   = 0.01;
-            var spread = 1;
+            var offset = 0.5f;
 
-            for (double n = prevNote - spread+1; n < note + spread+1; n++)
+            for (double n = prevNote - spread+offset; n < note + spread+offset; n++)
             {
                 for (double f = step; f <= 1.0; f += step)
                 {
-                    Console.Write("band noise " + note.ToString("0") + " (" + n.ToString("0") + ", " + f.ToString("0.000") + ") ... ");
+                    Console.Write(name + " " + note.ToString("0") + " (" + n.ToString("0") + ", " + f.ToString("0.000") + ") ... ");
 
                     double freq = note2freq(n + f);
                     double L    = SampleRate / freq * 2;

@@ -24,22 +24,23 @@ namespace SE_1000_Sounds
         {
             InitBuffers();
 
-            CreateToneSamples     ("Sine",     sine,   12, 150, 5);
-            CreateToneSamples     ("Square",   square, 12, 150, 5);
-            CreateToneSamples     ("Triangle", tri,    12, 150, 5);
-            CreateToneSamples     ("Saw",      saw,    12, 150, 5);
-
-            CreateLowNoiseSamples ("LowNoise",         12, 150, 5);
-            CreateHighNoiseSamples("HighNoise",        12, 150, 5);
-            CreateBandNoiseSamples("BandNoise",        12, 150, 5);
-                                                       
-            CreateSweepDownSamples("SlowSweepDown",    12, 150, 48, 1);
-            CreateSweepUpSamples  ("SlowSweepUp",      12, 150, 48, 0.1);
-                                                       
-            CreateSweepDownSamples("FastSweepDown",    12, 150, 48, 0.1);
-            CreateSweepUpSamples  ("FastSweepUp",      12, 150, 48, 0.01);
-
-            CreateCrunchSamples   ("Crunch",           12, 150, 1);
+            CreateToneSamples     ("Sine",     sine,     12, 150, 5);
+            CreateToneSamples     ("Triangle", tri,      12, 150, 5);
+            CreateToneSamples     ("Square",   square,   12, 150, 5);
+            CreateToneSamples     ("Saw",      saw,      12, 150, 5);
+                                                        
+            CreateLowNoiseSamples ("LowNoise",           12, 150, 5);
+            CreateHighNoiseSamples("HighNoise",          12, 150, 5);
+            CreateBandNoiseSamples("NarrowBandNoise", 1, 12, 150, 5);
+            CreateBandNoiseSamples("WideBandNoise",   6, 12, 150, 5);
+                                                     
+            CreateSweepDownSamples("SlowSweepDown",      12, 150, 48, 1);
+            CreateSweepUpSamples  ("SlowSweepUp",        12, 150, 48, 0.1);
+                                                        
+            CreateSweepDownSamples("FastSweepDown",      12, 150, 48, 0.1);
+            CreateSweepUpSamples  ("FastSweepUp",        12, 150, 48, 0.01);
+                                                          
+            CreatePulseSamples   ("Pulse",             12, 150, 1);
         }
 
 
@@ -68,7 +69,7 @@ namespace SE_1000_Sounds
             if (!Directory.Exists(filePath))
                 Directory.CreateDirectory(filePath);
 
-            filePath += "\\SE-909_" + name + "_" + note + ".wav";
+            filePath += "\\SE-1000_" + name + "_" + note + ".wav";
 
             wav.Save(filePath);
         }

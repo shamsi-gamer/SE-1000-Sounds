@@ -5,7 +5,7 @@ namespace SE_1000_Sounds
 {
     partial class Program
     {
-        static void CreateCrunchSamples(string name, int firstNote, int lastNote, double seconds)
+        static void CreatePulseSamples(string name, int firstNote, int lastNote, double seconds)
         {
             prevNote = firstNote * NoteScale - 1;
 
@@ -14,21 +14,24 @@ namespace SE_1000_Sounds
             for (int note = firstNote * NoteScale; note <= lastNote * NoteScale; note++)
             {
                 var wav = new WaveFile(SampleRate, seconds);
-                CreateCrunchSample(note, ref rndIndex, wav);
+                CreatePulseSample(note, ref rndIndex, wav);
                 SaveSample(wav, name, note);
             }
         }
 
 
-        static void CreateCrunchSample(double note, ref int rndIndex, WaveFile wav)
+        static void CreatePulseSample(double note, ref int rndIndex, WaveFile wav)
         {
-            double freq = note2freq(note);
+            double freqMult      = 16;
+            double clickFreqMult =  2;
+
+            double freq = note2freq(note) / freqMult;
             double L    = SampleRate/freq * 2;
 
             double clkFreq = freq * 64;
             double clkL    = SampleRate/clkFreq * 2;
 
-            Console.Write("crunch " + note.ToString("0") + " ... ");
+            Console.Write("pulse " + note.ToString("0") + " ... ");
 
             var  f = 0.0;
             var df = 1.0/wav.Sample.Length;
@@ -38,7 +41,7 @@ namespace SE_1000_Sounds
                 var c  = j % clkL;
                 var ck = Math.Max(16, clkL);
 
-                var s = Math.Sin(c / clkL * Tau);
+                var s = Math.Sin(c / clkL * Tau / clickFreqMult);
                 wav.Sample[i] = j < ck ? s * Volume : 0;
 
                 if (j > i % L) 
